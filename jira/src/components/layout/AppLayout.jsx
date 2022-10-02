@@ -41,7 +41,7 @@ const AppLayout = () => {
         display: 'flex'
       }}
     >
-      <Sidebar />
+      {/* <Sidebar /> */}
       <Box
         sx={{
           flexGrow: 1
