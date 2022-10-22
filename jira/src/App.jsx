@@ -6,20 +6,25 @@ import '@fontsource/roboto/700.css'
 import { createTheme, CssBaseline } from '@mui/material'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import AuthLayout from './components/layout/AuthLayout'
-import Board from './pages/Board'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 import AppLayout from './components/layout/AppLayout'
 import { useSelector } from 'react-redux'
-import Main from './components/common/Main'
+import CreateProject from './pages/CreateProject'
+import CreateTask from './components/common/CreateTask'
+import MyProject from './pages/MyProject'
+import ProjectDetail from './pages/ProjectDetail'
+import TaskDetail from './pages/TaskDetail'
+import CreateProject2 from './pages/CreateProject2'
+import EditProjectLayout from './components/layout/EditProjectLayout'
+import EditTask from './components/layout/EditTask'
 
 function App() {
   const { modeSystem } = useSelector(state => state.stateReducer)
   const theme = createTheme({
     palette: { mode: !modeSystem ? 'light' : 'dark' }
   })
-  console.log('defaut theme:', theme)
 
   return (
     <ThemeProvider theme={theme}>
@@ -31,9 +36,15 @@ function App() {
             <Route path="signup" element={<Signup />} />
           </Route>
           <Route path="/" element={<AppLayout />}>
-            <Route index element={<Home />} />
-            <Route path="boards" element={<Home />} />
-            <Route path="boards/:boardId" element={<Board />} />
+            <Route index element={<MyProject />} />
+
+            <Route path="my-project" element={<MyProject />} />
+            <Route path="project/:id" element={<ProjectDetail />} />
+            <Route path="task/:id" element={<TaskDetail />} />
+            <Route path="edit-task/:id" element={<EditTask />} />
+            <Route path="create-project" element={<CreateProject2 />} />
+            <Route path="edit-project/:id" element={<EditProjectLayout />} />
+            <Route path="create-task/:id" element={<CreateTask />} />
           </Route>
         </Routes>
       </BrowserRouter>

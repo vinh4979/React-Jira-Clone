@@ -1,23 +1,46 @@
-import { LoadingButton } from '@mui/lab'
-import { Box, Grid, Paper, styled, Typography } from '@mui/material'
-import React, { useEffect, useState } from 'react'
-import Dnd from 'src/components/common/Dnd'
-// import Dnd from 'src/components/common/Dnd'
-import Dnd2 from 'src/components/common/Dnd2'
-import Framer from 'src/components/common/Framer'
-import Main from 'src/components/common/Main'
+import React, { useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import GetProjectDetail from 'src/components/common/GetProjectDetail'
+import MainTask from 'src/components/common/MainTask'
+import AssignUserModal from 'src/components/common/modal.component/AssignUserModal'
+import {
+  getAllProjectAction,
+  getProjectDetailAction
+} from 'src/redux/action/ProjectAuthorizeAction'
+import { statusAction } from '../redux/action/StatusAction'
+import { getUserAction } from '../redux/action/userAction'
 
 export default function Home() {
-  const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: theme.palette.text.secondary
-  }))
+  const dispatch = useDispatch()
+  const { statusBlog } = useSelector(state => state.caseDataReducer)
+  const { arrProjectDetail } = useSelector(state => state.projectReducer)
+
+  const hanldeGetMyProject = () => {
+    let item
+    if (arrProjectDetail) {
+      const myProject = arrProjectDetail?.filter(project => project.id === 7850)
+      item = myProject[0]
+    }
+
+    return item
+  }
+
+  console.log('user reducer:', arrProjectDetail)
+
+  useEffect(() => {
+    dispatch(statusAction())
+    dispatch(getAllProjectAction())
+    dispatch(getProjectDetailAction())
+    dispatch(getUserAction(['bui vinh']))
+  }, [dispatch])
   return (
     <>
-      <Main />
+      <MainTask statusBlog={statusBlog} />
+      <GetProjectDetail
+        myProject={hanldeGetMyProject() ? hanldeGetMyProject() : ''}
+      />
+      <AssignUserModal />
     </>
   )
 }

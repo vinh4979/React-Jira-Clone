@@ -4,12 +4,13 @@
   "private": true,
   "dependencies": {
     "@atlaskit/css-reset": "^6.3.14",
-    "@ckeditor/ckeditor5-build-classic": "^35.1.0",
+    "@ckeditor/ckeditor5-build-classic": "^35.2.0",
     "@ckeditor/ckeditor5-react": "^5.0.2",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
     "@fontsource/roboto": "^4.5.8",
     "@mui/icons-material": "^5.10.3",
+    "@mui/joy": "^5.0.0-alpha.48",
     "@mui/lab": "^5.0.0-alpha.98",
     "@mui/material": "^5.10.4",
     "@mui/styles": "^5.10.3",
@@ -19,7 +20,9 @@
     "@testing-library/user-event": "^13.2.1",
     "axios": "^0.27.2",
     "emoji-mart": "^5.2.1",
+    "formik": "^2.2.9",
     "framer-motion": "^7.4.0",
+    "html-react-parser": "^3.0.4",
     "moment": "^2.29.4",
     "query-string": "^7.1.1",
     "react": "^18.0.0-rc.3",
@@ -62,6 +65,7 @@
     ]
   },
   "devDependencies": {
+    "@tinymce/tinymce-react": "^4.2.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.7.1"

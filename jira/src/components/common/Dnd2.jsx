@@ -32,6 +32,7 @@ const Dnd2 = () => {
   ]
 
   const [data, setData] = useState(itemData)
+
   const handleDragEnd = result => {
     if (!result.destination) return
     const items = Array.from(data)
@@ -40,6 +41,7 @@ const Dnd2 = () => {
     console.log(items)
     setData(items)
   }
+
   return (
     <div>
       <Container maxWidth="sm">

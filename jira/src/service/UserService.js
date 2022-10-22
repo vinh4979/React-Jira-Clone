@@ -12,6 +12,14 @@ export class UserService extends baseService {
   signin = body => {
     return this.post('/api/Users/signin', body)
   }
+
+  getUser = body => {
+    return this.get(`/api/Users/getUser?keyword=${body}`)
+  }
+
+  getAllUser = () => {
+    return this.get('/api/Users/getUser')
+  }
 }
 
 export const userService = new UserService()
