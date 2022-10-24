@@ -1,5 +1,6 @@
 import { styled } from '@mui/material'
 import React from 'react'
+import TableProject from './TableProject'
 
 const MainContainer = styled('div')(({ theme }) => ({
   flexGrow: 1,
@@ -10,7 +11,9 @@ const MainContainer = styled('div')(({ theme }) => ({
 export default function MainTask() {
   return (
     <>
-      <MainContainer>div</MainContainer>
+      <MainContainer>
+        <TableProject />
+      </MainContainer>
     </>
   )
 }

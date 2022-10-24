@@ -31,7 +31,7 @@ export class baseService {
       url: `${DOMAIN}${url}`,
       method: 'GET',
       headers: {
-        // Authorization: 'Bearer ' + localStorage.getItem(TOKEN),
+        Authorization: 'Bearer ' + localStorage.getItem(TOKEN),
         TokenCybersoft: `${TokenCybersoft}`
       }
     })

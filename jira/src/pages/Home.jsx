@@ -6,7 +6,6 @@ import Dnd from 'src/components/common/Dnd'
 import Dnd2 from 'src/components/common/Dnd2'
 import Framer from 'src/components/common/Framer'
 import Main from 'src/components/common/Main'
-
 export default function Home() {
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',

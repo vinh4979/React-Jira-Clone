@@ -1,7 +1,7 @@
 import { TOKEN } from 'src/config/configApi'
 import { USER_ACCOUNT } from 'src/config/configLocalStorage'
 import { userService } from 'src/service/UserService'
-import { LOADING, SIGNIN_SUCCESS } from '../type/type'
+import { GET_USER, LOADING, SIGNIN_SUCCESS } from '../type/type'
 
 export const signUpAction = body => {
   return async dispatch => {
@@ -42,6 +42,20 @@ export const signInAction = body => {
       // })
 
       console.log('sign-in', result)
+    } catch (err) {
+      console.log('sign-in-err:', err)
+    }
+  }
+}
+
+export const getUserAction = (key = '') => {
+  return async dispatch => {
+    try {
+      const result = await userService.getUser(key)
+      dispatch({
+        type: GET_USER,
+        payLoad: result.data.content
+      })
     } catch (err) {
       console.log('sign-in-err:', err)
     }
