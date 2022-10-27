@@ -10,7 +10,6 @@ const stateDefault = {
   arrProjectDetail: null,
   arrTasKDetail: null
 }
-
 export const projectReducer = (state = stateDefault, action) => {
   switch (action.type) {
     case GET_ALL_PROJECT: {

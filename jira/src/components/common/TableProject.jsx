@@ -13,7 +13,7 @@ import {
   TableRow
 } from '@mui/material'
 import { useDispatch } from 'react-redux'
-import { fetchProjectAction } from 'src/redux/action/projectAction'
+import { getAllProjectAction } from 'src/redux/action/ProjectAuthorizeAction'
 import { useSelector } from 'react-redux'
 import { Delete, Edit } from '@mui/icons-material'
 import CustomPopover from './Popover'
@@ -56,24 +56,17 @@ const useStyles = makeStyles({
 
 export default function TableProject() {
   const classes = useStyles()
-  const [page, setPage] = React.useState(0)
-  const [rowsPerPage, setRowsPerPage] = React.useState(10)
-
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(fetchProjectAction())
+    dispatch(getAllProjectAction())
     dispatch(getUserAction())
   }, [])
   const rows = useSelector(state => state.projectReducer.arrAllProject)
   const users = useSelector(state => state.userReducer.User)
-  console.log('ROWWWW', rows)
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage)
-  }
-  const handleChangeRowsPerPage = event => {
-    setRowsPerPage(+event.target.value)
-    setPage(0)
-  }
+  console.log(
+    'ROWWWW',
+    useSelector(state => state.projectReducer)
+  )
 
   const handleDeleteRows = () => {}
 
@@ -81,7 +74,7 @@ export default function TableProject() {
     <Paper className={classes.root}>
       <TableContainer className={classes.container}>
         <Table stickyHeader aria-label="sticky table">
-          <TableHead>
+          <TableHead sx={{ marginLeft: 10 }}>
             <TableRow>
               {columns.map(column => (
                 <TableCell
@@ -94,7 +87,7 @@ export default function TableProject() {
               ))}
             </TableRow>
           </TableHead>
-          <TableBody>
+          <TableBody sx={{ marginLeft: 10 }}>
             {rows?.map(row => {
               return (
                 <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
@@ -136,15 +129,6 @@ export default function TableProject() {
           </TableBody>
         </Table>
       </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
-        component="div"
-        count={rows?.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
     </Paper>
   )
 }
