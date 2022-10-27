@@ -19,6 +19,7 @@ import TaskDetail from './pages/TaskDetail'
 import CreateProject2 from './pages/CreateProject2'
 import EditProjectLayout from './components/layout/EditProjectLayout'
 import EditTask from './components/layout/EditTask'
+import TableProject from './components/common/TableProject'
 
 function App() {
   const { modeSystem } = useSelector(state => state.stateReducer)
@@ -37,7 +38,7 @@ function App() {
           </Route>
           <Route path="/" element={<AppLayout />}>
             <Route index element={<MyProject />} />
-
+            <Route path="project" element={<TableProject />} />
             <Route path="my-project" element={<MyProject />} />
             <Route path="project/:id" element={<ProjectDetail />} />
             <Route path="task/:id" element={<TaskDetail />} />

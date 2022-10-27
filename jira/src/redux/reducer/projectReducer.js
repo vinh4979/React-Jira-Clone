@@ -1,7 +1,8 @@
 import {
-  GET_ALL_PROJECT,
+  SET_PROJECT,
   GET_PROJECT_DETAIL,
-  GET_TASK_DETAIL
+  GET_TASK_DETAIL,
+  GET_ALL_PROJECT
 } from '../type/type'
 
 const stateDefault = {

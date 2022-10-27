@@ -2,7 +2,7 @@ import { Box, Paper, styled, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
 import TaskItem from './TaskItem'
-
+import TableProject from './TableProject'
 const MainContainer = styled('div')(({ theme }) => ({
   flexGrow: 1,
   // border: '1px solid red',
@@ -79,66 +79,7 @@ export default function MainTask({ statusBlog }) {
 
   return (
     <>
-      <MainContainer>
-        {/* render statusBlog  */}
-        {statusBlog?.map((item, index) => {
-          return (
-            <BlockTask key={index}>
-              <Paper
-                sx={{
-                  height: '100%',
-                  padding: '10px '
-                }}
-              >
-                <Typography
-                  variant="h6"
-                  color={'text.primary'}
-                  sx={{
-                    marginBottom: '10px'
-                  }}
-                >
-                  {item.alias}
-                </Typography>
-                {/* render các item của blog */}
-                <Box>
-                  <DragDropContext onDragEnd={handleDragEnd}>
-                    <Droppable droppableId="list">
-                      {provided => (
-                        <Box
-                          {...provided.droppableProps}
-                          ref={provided.innerRef}
-                        >
-                          {data &&
-                            [1, 2, 3, 4, 5, 6, 7, 8, 9].map(item => {
-                              return (
-                                <Draggable
-                                  key={item}
-                                  draggableId={item.toString()}
-                                  index={index}
-                                >
-                                  {provided => (
-                                    <Box
-                                      ref={provided.innerRef}
-                                      {...provided.draggableProps}
-                                      {...provided.dragHandleProps}
-                                      sx={{ marginBottom: '10px' }}
-                                    >
-                                      <TaskItem />
-                                    </Box>
-                                  )}
-                                </Draggable>
-                              )
-                            })}
-                        </Box>
-                      )}
-                    </Droppable>
-                  </DragDropContext>
-                </Box>
-              </Paper>
-            </BlockTask>
-          )
-        })}
-      </MainContainer>
+      <MainContainer>div</MainContainer>
     </>
   )
 }

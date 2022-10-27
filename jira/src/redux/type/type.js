@@ -4,6 +4,7 @@ export const SIGNIN_SUCCESS = 'SIGNIN_SUCCESS'
 export const SIGNOUT = 'SIGNOUT'
 export const SET_MODE = 'SET_MODE'
 
+export const SET_PROJECT = "SET_PROJECT"
 export const GET_BLOG = 'GET_BLOG'
 export const GET_PROJECT_CATEGORY = 'GET_PROJECT_CATEGORY'
 

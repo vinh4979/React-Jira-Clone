@@ -27,7 +27,7 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import MainTask from './MainTask'
-
+import TableProject from './TableProject'
 const drawerWidth = 240
 
 const MainBox = styled('main', { shouldForwardProp: prop => prop !== 'open' })(
@@ -233,47 +233,10 @@ export default function Main() {
             </ListItemButton>
           </ListItem>
           <Divider />
-          {/* <DragDropContext onDragEnd={handleDragEnd}>
-            <Droppable
-              key={'list-board-droppable'}
-              droppableId={'list-board-droppable'}
-            >
-              {provided => (
-                <div {...provided.droppableProps} ref={provided.innerRef}>
-                  {itemData.map((item, index) => {
-                    return (
-                      <Draggable
-                        key={item.id}
-                        draggableId={item.id.toString()}
-                        index={index}
-                      >
-                        {(provided, snapshot) => (
-                          <ListItemButton
-                            ref={provided.innerRef}
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-                            sx={{
-                              pl: '20px',
-                              cursor: snapshot.isDragging
-                                ? 'grab'
-                                : 'pointer !important'
-                            }}
-                          >
-                            <Typography>{item.title}</Typography>
-                          </ListItemButton>
-                        )}
-                      </Draggable>
-                    )
-                  })}
-                </div>
-              )}
-            </Droppable>
-          </DragDropContext> */}
         </List>
       </Drawer>
       <MainBox open={open}>
         <DrawerHeader />
-        {/* // here */}
         <MainTask />
       </MainBox>
     </Box>

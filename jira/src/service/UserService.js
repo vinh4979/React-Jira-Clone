@@ -4,7 +4,6 @@ export class UserService extends baseService {
   constructor() {
     super()
   }
-
   signup = body => {
     return this.post('/api/Users/signup', body)
   }
@@ -13,12 +12,8 @@ export class UserService extends baseService {
     return this.post('/api/Users/signin', body)
   }
 
-  getUser = body => {
-    return this.get(`/api/Users/getUser?keyword=${body}`)
-  }
-
-  getAllUser = () => {
-    return this.get('/api/Users/getUser')
+  getUser = () => {
+    this.get(`/api/Users/getUser`)
   }
 }
 

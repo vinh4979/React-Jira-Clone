@@ -1,4 +1,4 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux'
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 import { stateReducer } from '../redux/reducer/stateReducer'
 import { authReducer } from '../redux/reducer/authReducer'
@@ -22,11 +22,10 @@ const rootReducer = combineReducers({
   priorityReducer,
   statusReducer
 })
-
-const store = createStore(
-  rootReducer,
-  applyMiddleware(thunk)
-  // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-)
+const composeEnhancers =
+  process.env.NODE_ENV !== 'production'
+    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    : compose
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)))
 
 export default store
