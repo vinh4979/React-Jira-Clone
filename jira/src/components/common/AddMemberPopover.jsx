@@ -7,6 +7,8 @@ import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
+import { assignUserProjectAction } from 'src/redux/action/ProjectAuthorizeAction'
+import { useDispatch } from 'react-redux'
 export default function AddMemberPopover(props) {
   const { row, id, user } = props
   const [anchorEl, setAnchorEl] = React.useState(null)
@@ -23,7 +25,15 @@ export default function AddMemberPopover(props) {
   const handleClosePopover = () => {
     setAnchorEl(null)
   }
-
+  const dispatch = useDispatch()
+  const handleAssignUserToProject = event => {
+    const body = {
+      projectId: row.id,
+      userId: +event.target.id
+    }
+    dispatch(assignUserProjectAction(body))
+    handleClosePopover()
+  }
   const openPopover = Boolean(anchorEl)
   return (
     <span>
@@ -52,17 +62,14 @@ export default function AddMemberPopover(props) {
         <FormControl sx={{ width: 200 }}>
           <Select value={member} label="Member" onChange={handleChange}>
             {user?.map((item, index) => {
-              if (index < 10 && !memberOfRow?.includes(item.id)) {
+              if (!memberOfRow?.includes(item.userId)) {
                 return (
-                  <MenuItem value={item.id}>
+                  <MenuItem
+                    value={item.userId}
+                    id={item.userId}
+                    onClick={handleAssignUserToProject}
+                  >
                     <span>{item.name}</span>{' '}
-                    <button
-                      variant="contained"
-                      // onClick={handleClick}
-                      className="rounded-full w-7 h-7 bg-neutral-600 text-black ml-3 "
-                    >
-                      +
-                    </button>
                   </MenuItem>
                 )
               }

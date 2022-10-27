@@ -17,7 +17,7 @@ import { getAllProjectAction } from 'src/redux/action/ProjectAuthorizeAction'
 import { useSelector } from 'react-redux'
 import { Delete, Edit } from '@mui/icons-material'
 import CustomPopover from './Popover'
-import { getUserAction } from 'src/redux/action/userAction'
+import { getAllUserAction, getUserAction } from 'src/redux/action/userAction'
 import AddMemberPopover from './AddMemberPopover'
 
 const columns = [
@@ -59,10 +59,10 @@ export default function TableProject() {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getAllProjectAction())
-    dispatch(getUserAction())
+    dispatch(getAllUserAction())
   }, [])
   const rows = useSelector(state => state.projectReducer.arrAllProject)
-  const users = useSelector(state => state.userReducer.User)
+  const users = useSelector(state => state.userReducer.arrAllUser)
   console.log(
     'ROWWWW',
     useSelector(state => state.projectReducer)
