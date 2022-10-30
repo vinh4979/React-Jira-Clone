@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Avatar,
   Button,
@@ -22,13 +22,28 @@ const Projects = (props) => {
   const debounceSearchRef = useRef(null);
   const projectList = useSelector((state) => state.project.projectList);
 
-  const dataSource = projectList.map((project) => {
+  const [value, setValue] = useState(false);
+
+  const userId = JSON.parse(localStorage.getItem("loginInfo"));
+
+  const data = () => {
+    if (value === false) {
+      return projectList;
+    } else {
+      const list = projectList.filter(
+        (project) => project?.creator.id === userId
+      );
+      return list;
+    }
+  };
+
+  const dataSource = data().map((project) => {
     return { ...project, key: project.id };
   });
 
   useEffect(() => {
     dispatch(fetchAllProjects());
-  }, [dispatch]);
+  }, [dispatch, value]);
 
   const handleSearch = (e) => {
     let params = {};
@@ -46,16 +61,16 @@ const Projects = (props) => {
     }, 400);
   };
 
-  const handleEditInfo =(record)=>{
-      let chosenProject ={
-        "id": record.id,
-        "projectName": record.projectName,
-        "creator": record.creator.id,
-        "description": record.description,
-        "categoryId":record.categoryId
-      }
-      dispatch(createAction(actionType.SET_PROJECT_EDIT_INFO, chosenProject))
-    }
+  const handleEditInfo = (record) => {
+    let chosenProject = {
+      id: record.id,
+      projectName: record.projectName,
+      creator: record.creator.id,
+      description: record.description,
+      categoryId: record.categoryId,
+    };
+    dispatch(createAction(actionType.SET_PROJECT_EDIT_INFO, chosenProject));
+  };
 
   const showConfirmDeleteProjectModal = ({ projectName, id: projectId }) => {
     return () => {
@@ -116,13 +131,26 @@ const Projects = (props) => {
         </Link>
       </div>
 
-      <div>
+      <div className="flex space-x-2">
         <Input
           allowClear
           suffix={<SearchOutlined />}
           className="mb-6 w-48 rounded"
           onChange={handleSearch}
+          placeholder="Searching project"
         />
+        <button
+          className="flex justify-center items-center h-8 bg-blue-700 hover:bg-blue-600 focus:bg-blue-600 text-white hover:text-white font-medium py-1.5 px-3 rounded cursor-pointer"
+          onClick={() => setValue(true)}
+        >
+          Show my project
+        </button>
+        <button
+          className="flex justify-center items-center h-8 bg-blue-700 hover:bg-blue-600 focus:bg-blue-600 text-white hover:text-white font-medium py-1.5 px-3 rounded cursor-pointer"
+          onClick={() => setValue(false)}
+        >
+          Show all project
+        </button>
       </div>
 
       <Table dataSource={dataSource}>
@@ -184,7 +212,12 @@ const Projects = (props) => {
             const menu = (
               <Menu className="rounded">
                 <Menu.Item key="projectSettings">
-                  <Link to={`/projects/${record.id}/edit`} onClick={()=>{handleEditInfo(record)}}>
+                  <Link
+                    to={`/projects/${record.id}/edit`}
+                    onClick={() => {
+                      handleEditInfo(record);
+                    }}
+                  >
                     Project settings
                   </Link>
                 </Menu.Item>
