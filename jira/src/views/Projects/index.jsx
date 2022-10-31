@@ -31,7 +31,7 @@ const Projects = (props) => {
       return projectList;
     } else {
       const list = projectList.filter(
-        (project) => project?.creator.id === userId
+        (project) => project?.creator.id === userId.id
       );
       return list;
     }
